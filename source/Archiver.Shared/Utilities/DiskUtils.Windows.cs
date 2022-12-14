@@ -21,6 +21,7 @@
 using System;
 using System.Runtime.InteropServices;
 using FoxHollow.Archiver.Shared.Exceptions;
+using FoxHollow.FHM.Shared.Utilities;
 using Microsoft.Win32.SafeHandles;
 
 namespace FoxHollow.Archiver.Shared.Utilities

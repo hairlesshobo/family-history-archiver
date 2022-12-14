@@ -24,6 +24,7 @@ using System.Linq;
 using FoxHollow.Archiver.Shared.Classes.Disc;
 using FoxHollow.Archiver.Shared;
 using FoxHollow.Archiver.Shared.Utilities;
+using FoxHollow.FHM.Shared.Utilities;
 using System.Threading.Tasks;
 using System.Threading;
 

@@ -4,3 +4,6 @@
 [submodule "LibSMB2Sharp"]
 	path = LibSMB2Sharp
 	url = ssh://git@git.foxhollow.cc:4022/hairlesshobo/LibSMB2Sharp.git
+[submodule "source/FoxHollow.FHM.Shared"]
+	path = source/FoxHollow.FHM.Shared
+	url = ssh://git@git.foxhollow.cc:4022/family-history/shared.git

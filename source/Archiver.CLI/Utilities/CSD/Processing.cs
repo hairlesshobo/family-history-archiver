@@ -28,6 +28,7 @@ using FoxHollow.Archiver.Shared;
 using FoxHollow.Archiver.Shared.Classes;
 using FoxHollow.Archiver.Shared.Classes.CSD;
 using FoxHollow.Archiver.Shared.Utilities;
+using FoxHollow.FHM.Shared.Utilities;
 
 namespace FoxHollow.Archiver.CLI.Utilities.CSD
 {

@@ -22,6 +22,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using FoxHollow.Archiver.Shared.Utilities;
+using FoxHollow.FHM.Shared.Utilities;
 using Newtonsoft.Json;
 
 namespace FoxHollow.Archiver.Shared.Classes.Tape

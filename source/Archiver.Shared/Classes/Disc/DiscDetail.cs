@@ -26,6 +26,7 @@ using System.Text;
 using System.Threading.Tasks;
 using FoxHollow.Archiver.Shared.Interfaces;
 using FoxHollow.Archiver.Shared.Utilities;
+using FoxHollow.FHM.Shared.Utilities;
 using Newtonsoft.Json;
 
 namespace FoxHollow.Archiver.Shared.Classes.Disc

@@ -32,6 +32,7 @@ using FoxHollow.Archiver.Shared.Models;
 using FoxHollow.Archiver.Shared.Structures;
 using FoxHollow.Archiver.Shared.Utilities;
 using FoxHollow.Archiver.Shared.Utilities.Disc;
+using FoxHollow.FHM.Shared.Utilities;
 using Newtonsoft.Json;
 
 namespace FoxHollow.Archiver.Shared.Operations.Disc
