@@ -28,7 +28,6 @@ using FoxHollow.Archiver.Shared.Classes;
 using FoxHollow.Archiver.Shared.Exceptions;
 using FoxHollow.Archiver.Shared.Models;
 using FoxHollow.Archiver.Shared.Native;
-using FoxHollow.FHM.Shared.Utilities;
 using Microsoft.Win32.SafeHandles;
 
 namespace FoxHollow.Archiver.Shared.Utilities

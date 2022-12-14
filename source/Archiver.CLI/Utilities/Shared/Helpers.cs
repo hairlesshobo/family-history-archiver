@@ -30,7 +30,6 @@ using FoxHollow.Archiver.Shared.Classes.Tape;
 using FoxHollow.Archiver.Shared.Interfaces;
 using FoxHollow.Archiver.Shared.Utilities;
 using FoxHollow.Archiver.Shared.Utilities.Disc;
-using FoxHollow.FHM.Shared.Utilities;
 using FoxHollow.TerminalUI;
 using FoxHollow.TerminalUI.Elements;
 using FoxHollow.TerminalUI.Types;

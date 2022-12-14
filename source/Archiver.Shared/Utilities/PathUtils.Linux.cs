@@ -19,34 +19,15 @@
  */
 
 using System;
-using System.Collections.Generic;
-using FoxHollow.Archiver.Shared.Interfaces;
-using FoxHollow.Archiver.Shared.Utilities;
 
-namespace FoxHollow.Archiver.Shared.Models.Config
+namespace FoxHollow.Archiver.Shared.Utilities
 {
-    public class DiscConfig : IValidatableConfig
+    public static partial class PathUtils
     {
-        public long CapacityLimit { get; set; } = 24928845824;
-
-        public long DVDCapacityLimit { get; set; } = 4566155264;
-
-        public string[] SourcePaths { get; set; }
-
-        public string[] ExcludePaths { get; set; }
-            
-        public string[] ExcludeFiles { get; set; }
-        
-        public string StagingDir { get; set; } = "../";
-
-        public List<ValidationError> Validate(string prefix = null)
+        public static class Linux
         {
-            Array.Sort(SourcePaths);
-            ExcludePaths = PathUtils.CleanExcludePaths(ExcludePaths);
-            
-            List<ValidationError> results = new List<ValidationError>();
-
-            return results;
+            public static string GetDrivePath(string driveName)
+                => (driveName.IndexOf('/') >= 0 ? driveName : $"/dev/{driveName}");
         }
     }
 }

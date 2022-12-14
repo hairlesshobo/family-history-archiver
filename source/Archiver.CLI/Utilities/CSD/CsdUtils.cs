@@ -26,7 +26,6 @@ using System.Management;
 using System.Threading;
 using FoxHollow.Archiver.Shared.Classes.CSD;
 using FoxHollow.Archiver.Shared.Utilities;
-using FoxHollow.FHM.Shared.Utilities;
 using FoxHollow.TerminalUI.Elements;
 using FoxHollow.TerminalUI.Types;
 

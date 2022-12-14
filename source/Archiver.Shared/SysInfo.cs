@@ -28,7 +28,6 @@ using System.Runtime.InteropServices;
 using FoxHollow.Archiver.Shared.Models;
 using FoxHollow.Archiver.Shared.Models.Config;
 using FoxHollow.Archiver.Shared.Utilities;
-using FoxHollow.FHM.Shared.Utilities;
 
 namespace FoxHollow.Archiver.Shared
 {

@@ -21,7 +21,6 @@
 using System;
 using FoxHollow.Archiver.Shared.Exceptions;
 using FoxHollow.Archiver.Shared.Native;
-using FoxHollow.FHM.Shared.Utilities;
 
 namespace FoxHollow.Archiver.Shared.Utilities
 {

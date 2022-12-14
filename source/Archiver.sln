@@ -11,8 +11,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Archiver.TapeServer", "Arch
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Archiver.TestCLI", "Archiver.TestCLI\Archiver.TestCLI.csproj", "{CF121DE4-0267-47DB-979B-A60E05651D4E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoxHollow.FHM.Shared", "FoxHollow.FHM.Shared\FoxHollow.FHM.Shared.csproj", "{B3C9CDA2-AFDB-4372-AB48-3DFCE06B1C53}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -74,17 +72,5 @@ Global
 		{CF121DE4-0267-47DB-979B-A60E05651D4E}.Release|x64.Build.0 = Release|Any CPU
 		{CF121DE4-0267-47DB-979B-A60E05651D4E}.Release|x86.ActiveCfg = Release|Any CPU
 		{CF121DE4-0267-47DB-979B-A60E05651D4E}.Release|x86.Build.0 = Release|Any CPU
-		{B3C9CDA2-AFDB-4372-AB48-3DFCE06B1C53}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B3C9CDA2-AFDB-4372-AB48-3DFCE06B1C53}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B3C9CDA2-AFDB-4372-AB48-3DFCE06B1C53}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{B3C9CDA2-AFDB-4372-AB48-3DFCE06B1C53}.Debug|x64.Build.0 = Debug|Any CPU
-		{B3C9CDA2-AFDB-4372-AB48-3DFCE06B1C53}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{B3C9CDA2-AFDB-4372-AB48-3DFCE06B1C53}.Debug|x86.Build.0 = Debug|Any CPU
-		{B3C9CDA2-AFDB-4372-AB48-3DFCE06B1C53}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B3C9CDA2-AFDB-4372-AB48-3DFCE06B1C53}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B3C9CDA2-AFDB-4372-AB48-3DFCE06B1C53}.Release|x64.ActiveCfg = Release|Any CPU
-		{B3C9CDA2-AFDB-4372-AB48-3DFCE06B1C53}.Release|x64.Build.0 = Release|Any CPU
-		{B3C9CDA2-AFDB-4372-AB48-3DFCE06B1C53}.Release|x86.ActiveCfg = Release|Any CPU
-		{B3C9CDA2-AFDB-4372-AB48-3DFCE06B1C53}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
