@@ -30,7 +30,7 @@ namespace FoxHollow.Archiver.CLI
         static void Main(string[] args)
         {
             Utils.RequireSupportedOS();
-            SysInfo.InitPlatform();
+            AppInfo.InitPlatform();
 
             Terminal.Run("Loading...", "Archiver", Tasks.Universal.MainMenu.StartTaskAsync);
         }

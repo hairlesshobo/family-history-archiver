@@ -26,12 +26,11 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using FoxHollow.Archiver.Shared.Classes;
 using FoxHollow.Archiver.Shared.Classes.Disc;
-using FoxHollow.Archiver.Shared.Models;
-using FoxHollow.Archiver.Shared.Structures;
-using FoxHollow.Archiver.Shared.Utilities;
 using FoxHollow.Archiver.Shared.Utilities.Disc;
+using FoxHollow.FHM.Shared.Classes;
+using FoxHollow.FHM.Shared.Structures;
+using FoxHollow.FHM.Shared.Utilities;
 using Newtonsoft.Json;
 
 namespace FoxHollow.Archiver.Shared.Operations.Disc
@@ -354,10 +353,10 @@ namespace FoxHollow.Archiver.Shared.Operations.Disc
 
             this.OnDiscIndexProgress(disc, _stats, progress);
 
-            if (!Directory.Exists(SysInfo.Directories.Index))
-                Directory.CreateDirectory(SysInfo.Directories.Index);
+            if (!Directory.Exists(AppInfo.Directories.Index))
+                Directory.CreateDirectory(AppInfo.Directories.Index);
 
-            string txtIndexPath = PathUtils.CleanPathCombine(SysInfo.Directories.Index, "index.txt");
+            string txtIndexPath = PathUtils.CleanPathCombine(AppInfo.Directories.Index, "index.txt");
             string discIndexTxtPath = PathUtils.CleanPathCombine(disc.RootStagingPath, "index.txt");
  
             bool createMasterIndex = !File.Exists(txtIndexPath);      
@@ -507,8 +506,8 @@ namespace FoxHollow.Archiver.Shared.Operations.Disc
 
             this.OnCreateIsoProgress(disc, _stats, progress);
 
-            if (!Directory.Exists(SysInfo.Directories.ISO))
-                Directory.CreateDirectory(SysInfo.Directories.ISO);
+            if (!Directory.Exists(AppInfo.Directories.ISO))
+                Directory.CreateDirectory(AppInfo.Directories.ISO);
 
             ISO_Creator creator = new ISO_Creator(disc.DiscName, disc.RootStagingPath, disc.IsoPath);
 

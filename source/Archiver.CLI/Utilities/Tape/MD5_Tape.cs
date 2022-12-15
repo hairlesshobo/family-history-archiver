@@ -24,8 +24,8 @@ using System.Security.Cryptography;
 using FoxHollow.Archiver.Shared;
 using FoxHollow.Archiver.Shared.Classes.Tape;
 using FoxHollow.Archiver.Shared.Models;
-using FoxHollow.Archiver.Shared.Structures;
-using FoxHollow.Archiver.Shared.TapeDrivers;
+using FoxHollow.FHM.Shared.Structures;
+using FoxHollow.FHM.Shared.TapeDrivers;
 
 namespace FoxHollow.Archiver.CLI.Utilities.Tape
 {
@@ -61,7 +61,7 @@ namespace FoxHollow.Archiver.CLI.Utilities.Tape
         public void GenerateHash()
         {
             bool hasJson = TapeUtils.TapeHasJsonRecord();
-            int blockSize = SysInfo.Config.Tape.BlockingFactor * 512;
+            int blockSize = AppInfo.Config.Tape.BlockingFactor * 512;
 
             if (_requiresJsonRecord && !hasJson)
                 throw new InvalidOperationException("MD5 class was created without a source size, therefore the tape must have the json summary record");
@@ -73,7 +73,7 @@ namespace FoxHollow.Archiver.CLI.Utilities.Tape
                 _sourceSize = summary.TotalArchiveBytes;
             }
 
-            using (NativeWindowsTapeDriver tape = new NativeWindowsTapeDriver(SysInfo.TapeDrive, blockSize))
+            using (NativeWindowsTapeDriver tape = new NativeWindowsTapeDriver(AppInfo.TapeDrive, blockSize))
             using (MD5 md5 = MD5.Create())
             {
                 Md5Progress progress = new Md5Progress()

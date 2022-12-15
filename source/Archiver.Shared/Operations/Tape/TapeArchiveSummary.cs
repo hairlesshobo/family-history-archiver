@@ -22,8 +22,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using FoxHollow.Archiver.Shared.Classes.Tape;
-using FoxHollow.Archiver.Shared.Models;
 using FoxHollow.Archiver.Shared.Utilities;
+using FoxHollow.FHM.Shared.Models;
 
 namespace FoxHollow.Archiver.Shared.Operations.Tape
 {

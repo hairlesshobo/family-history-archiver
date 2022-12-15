@@ -25,8 +25,9 @@ using System.Threading;
 using FoxHollow.Archiver.CLI.Utilities.Shared;
 using FoxHollow.Archiver.Shared;
 using FoxHollow.Archiver.Shared.Classes.Tape;
-using FoxHollow.Archiver.Shared.TapeDrivers;
 using FoxHollow.Archiver.Shared.Utilities;
+using FoxHollow.FHM.Shared.TapeDrivers;
+using FoxHollow.FHM.Shared.Utilities;
 
 namespace FoxHollow.Archiver.CLI.Utilities.Tape
 {
@@ -91,7 +92,7 @@ namespace FoxHollow.Archiver.CLI.Utilities.Tape
                 WriteTapeJsonToIndex();
                 RewindTape();
 
-                if (SysInfo.Config.Tape.AutoEject)
+                if (AppInfo.Config.Tape.AutoEject)
                     EjectTape();
             }
 
@@ -110,7 +111,7 @@ namespace FoxHollow.Archiver.CLI.Utilities.Tape
                 _status.WriteStatus("Rewinding tape");
             }
 
-            using (NativeWindowsTapeDriver tape = new NativeWindowsTapeDriver(SysInfo.TapeDrive, false))
+            using (NativeWindowsTapeDriver tape = new NativeWindowsTapeDriver(AppInfo.TapeDrive, false))
             {
                 tape.RewindTape();
             }
@@ -123,7 +124,7 @@ namespace FoxHollow.Archiver.CLI.Utilities.Tape
                 _status.WriteStatus("Ejecting tape");
             }
 
-            using (NativeWindowsTapeDriver tape = new NativeWindowsTapeDriver(SysInfo.TapeDrive, false))
+            using (NativeWindowsTapeDriver tape = new NativeWindowsTapeDriver(AppInfo.TapeDrive, false))
             {
                 tape.EjectTape();
             }
@@ -197,7 +198,7 @@ namespace FoxHollow.Archiver.CLI.Utilities.Tape
                 _status.WriteStatus("Writing summary to tape");
             }
 
-            using (NativeWindowsTapeDriver tape = new NativeWindowsTapeDriver(SysInfo.TapeDrive, (uint)SysInfo.Config.Tape.TextBlockSize, false))
+            using (NativeWindowsTapeDriver tape = new NativeWindowsTapeDriver(AppInfo.TapeDrive, (uint)AppInfo.Config.Tape.TextBlockSize, false))
             {
                 string templatePath = Path.Join(Directory.GetCurrentDirectory(), "templates", "tape_summary.txt");
                 string[] lines = File.ReadAllLines(templatePath);
@@ -231,7 +232,7 @@ namespace FoxHollow.Archiver.CLI.Utilities.Tape
                 _status.WriteStatus("Writing json record to tape");
             }
 
-            using (NativeWindowsTapeDriver tape = new NativeWindowsTapeDriver(SysInfo.TapeDrive, (uint)SysInfo.Config.Tape.TextBlockSize, false))
+            using (NativeWindowsTapeDriver tape = new NativeWindowsTapeDriver(AppInfo.TapeDrive, (uint)AppInfo.Config.Tape.TextBlockSize, false))
             {
                 string json = Newtonsoft.Json.JsonConvert.SerializeObject(_tapeDetail.GetSummary(), Newtonsoft.Json.Formatting.None);
                 byte[] buffer = TapeUtilsNew.GetStringPaddedBytes(json, tape.BlockSize);
@@ -245,14 +246,14 @@ namespace FoxHollow.Archiver.CLI.Utilities.Tape
         
         private void ArchiveFiles()
         {
-            uint blockSize = (uint)(512 * SysInfo.Config.Tape.BlockingFactor);
-            uint bufferBlockCount = (uint)SysInfo.Config.Tape.MemoryBufferBlockCount;
-            uint minBufferPercent = (uint)SysInfo.Config.Tape.MemoryBufferMinFill;
+            uint blockSize = (uint)(512 * AppInfo.Config.Tape.BlockingFactor);
+            uint bufferBlockCount = (uint)AppInfo.Config.Tape.MemoryBufferBlockCount;
+            uint minBufferPercent = (uint)AppInfo.Config.Tape.MemoryBufferMinFill;
 
             TapeInfo beforeInfo = TapeUtils.GetTapeInfo();
             long remainingCapacityBefore = beforeInfo.MediaInfo.Capacity - beforeInfo.MediaInfo.Remaining;
 
-            using (NativeWindowsTapeDriver tape = new NativeWindowsTapeDriver(SysInfo.TapeDrive, blockSize, false))
+            using (NativeWindowsTapeDriver tape = new NativeWindowsTapeDriver(AppInfo.TapeDrive, blockSize, false))
             {
                 tape.SetDriveCompression();
 

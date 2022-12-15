@@ -23,7 +23,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using FoxHollow.Archiver.Shared.Models;
+using FoxHollow.FHM.Shared.Models;
 using FoxHollow.Archiver.Shared.Models.Config;
 using Microsoft.Extensions.Configuration;
 

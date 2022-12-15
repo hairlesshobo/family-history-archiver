@@ -28,11 +28,11 @@ using System.Threading.Tasks;
 using FoxHollow.Archiver.Shared.Classes.CSD;
 using FoxHollow.Archiver.Shared.Classes.Disc;
 using FoxHollow.Archiver.Shared.Classes.Tape;
-using FoxHollow.Archiver.Shared.Interfaces;
+using FoxHollow.FHM.Shared.Interfaces;
 
 namespace FoxHollow.Archiver.Shared.Utilities
 {
-    public static class HelpersNew
+    public static class ArchiveHelpers
     {
         private static string[] validMediaTypes = new string[] { "disc", "tape", "csd" };
         public static Task<List<TReturn>> ReadMediaIndexAsync<TReturn>(string mediaType, CancellationToken cToken, Action<int, int> progressUpdated = null)
@@ -46,12 +46,12 @@ namespace FoxHollow.Archiver.Shared.Utilities
 
             return Task.Run(async () => 
             {
-                if (!Directory.Exists(SysInfo.Directories.JSON))
+                if (!Directory.Exists(AppInfo.Directories.JSON))
                     return null;
 
                 List<TReturn> mediaEntries = new List<TReturn>();
 
-                string[] jsonFiles = Directory.GetFiles(SysInfo.Directories.JSON, $"{mediaType}_*.json");
+                string[] jsonFiles = Directory.GetFiles(AppInfo.Directories.JSON, $"{mediaType}_*.json");
                 int totalFiles = jsonFiles.Length;
                 
                 if (totalFiles == 0)
@@ -105,16 +105,6 @@ namespace FoxHollow.Archiver.Shared.Utilities
 
                 return mediaEntries;
             });
-        }
-
-        public static long RoundToNextMultiple(long value, int multiple)
-        {
-            if (value == 0)
-                return 0;
-                
-            long nearestMultiple = (long)Math.Round((value / (double)multiple), MidpointRounding.ToPositiveInfinity) * multiple;
-
-            return nearestMultiple;
         }
     }
 }

@@ -23,8 +23,11 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Text.RegularExpressions;
-using FoxHollow.Archiver.Shared.Interfaces;
 using FoxHollow.Archiver.Shared.Utilities;
+using FoxHollow.FHM.Shared;
+using FoxHollow.FHM.Shared.Interfaces;
+using FoxHollow.FHM.Shared.Models;
+using FoxHollow.FHM.Shared.Utilities;
 
 namespace FoxHollow.Archiver.Shared.Models.Config
 {

@@ -25,9 +25,10 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using FoxHollow.Archiver.Shared;
-using FoxHollow.Archiver.Shared.Classes;
 using FoxHollow.Archiver.Shared.Classes.CSD;
 using FoxHollow.Archiver.Shared.Utilities;
+using FoxHollow.FHM.Shared.Classes;
+using FoxHollow.FHM.Shared.Utilities;
 
 namespace FoxHollow.Archiver.CLI.Utilities.CSD
 {
@@ -137,7 +138,7 @@ namespace FoxHollow.Archiver.CLI.Utilities.CSD
                 CsdSourceFile file = csd.PendingFiles.First();
 
                 // check if we need to save the index
-                if ((sw.ElapsedMilliseconds - lastIndexSave) > (SysInfo.Config.CSD.AutoSaveInterval * 1000))
+                if ((sw.ElapsedMilliseconds - lastIndexSave) > (AppInfo.Config.CSD.AutoSaveInterval * 1000))
                 {
                     indexSaveCallback();
 
@@ -238,10 +239,10 @@ namespace FoxHollow.Archiver.CLI.Utilities.CSD
         {
             Status.WriteCsdIndex(csd, masterSw.Elapsed, 0.0);
 
-            if (!Directory.Exists(SysInfo.Directories.Index))
-                Directory.CreateDirectory(SysInfo.Directories.Index);
+            if (!Directory.Exists(AppInfo.Directories.Index))
+                Directory.CreateDirectory(AppInfo.Directories.Index);
 
-            string txtIndexPath = PathUtils.CleanPathCombine(SysInfo.Directories.Index, "index.txt");
+            string txtIndexPath = PathUtils.CleanPathCombine(AppInfo.Directories.Index, "index.txt");
 
             bool createMasterIndex = !File.Exists(txtIndexPath);      
             string headerLine = $"CSD   {"Archive Date (UTC)".PadRight(19)}   {"Create Date (UTC)".PadRight(19)}   {"Modify Date (UTC)".PadRight(19)}   {"Size".PadLeft(12)}   Path";      

@@ -23,7 +23,7 @@ using System.IO;
 using System.Linq;
 using FoxHollow.Archiver.Shared.Classes.Disc;
 using FoxHollow.Archiver.Shared;
-using FoxHollow.Archiver.Shared.Utilities;
+using FoxHollow.FHM.Shared.Utilities;
 using System.Threading.Tasks;
 using System.Threading;
 
@@ -55,7 +55,7 @@ namespace FoxHollow.Archiver.Shared.Utilities.Disc
         {
             _sw.Start();
 
-            foreach (string dirtySourcePath in SysInfo.Config.Disc.SourcePaths)
+            foreach (string dirtySourcePath in AppInfo.Config.Disc.SourcePaths)
             {
                 string sourcePath = PathUtils.CleanPath(dirtySourcePath);
 
@@ -82,7 +82,7 @@ namespace FoxHollow.Archiver.Shared.Utilities.Disc
 
                 string cleanDir = PathUtils.CleanPath(dir);
 
-                if (!(SysInfo.Config.Disc.ExcludePaths.Any(x => cleanDir.ToLower().StartsWith(x.ToLower()))))
+                if (!(AppInfo.Config.Disc.ExcludePaths.Any(x => cleanDir.ToLower().StartsWith(x.ToLower()))))
                     ScanDirectory(dir, cToken);
             }
 
@@ -93,10 +93,10 @@ namespace FoxHollow.Archiver.Shared.Utilities.Disc
 
                 string cleanFile = PathUtils.CleanPath(file);
 
-                if (SysInfo.Config.Disc.ExcludePaths.Any(x => cleanFile.ToLower().StartsWith(x.ToLower())))
+                if (AppInfo.Config.Disc.ExcludePaths.Any(x => cleanFile.ToLower().StartsWith(x.ToLower())))
                     _stats.ExcludedFileCount++;
 
-                else if (SysInfo.Config.Disc.ExcludeFiles.Any(x => PathUtils.GetFileName(cleanFile).ToLower().EndsWith(x.ToLower())))
+                else if (AppInfo.Config.Disc.ExcludeFiles.Any(x => PathUtils.GetFileName(cleanFile).ToLower().EndsWith(x.ToLower())))
                     _stats.ExcludedFileCount++;
 
                 else

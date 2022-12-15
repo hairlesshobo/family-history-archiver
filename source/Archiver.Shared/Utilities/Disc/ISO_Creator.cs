@@ -22,6 +22,7 @@ using System;
 using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
+using FoxHollow.FHM.Shared.Utilities;
 
 namespace FoxHollow.Archiver.Shared.Utilities.Disc
 {
@@ -51,7 +52,7 @@ namespace FoxHollow.Archiver.Shared.Utilities.Disc
         public void CreateISO(CancellationToken cToken = default)
         {
             string procArgs = $" --burn-data -folder[\\]:\"{PathUtils.DirtyPath(_sourceDirectory)}\" -name:\"{_discName}\" -udf:2.5 -iso:\"{PathUtils.DirtyPath(_destinationPath)}\"";
-            string processPath = PathUtils.ResolveRelativePath(SysInfo.Config.CdbxpPath);
+            string processPath = PathUtils.ResolveRelativePath(AppInfo.Config.CdbxpPath);
 
             Process process = new Process();
             process.StartInfo.FileName = processPath;

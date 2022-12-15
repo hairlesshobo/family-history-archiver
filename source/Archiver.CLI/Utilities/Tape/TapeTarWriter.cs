@@ -26,7 +26,7 @@ using System.Security.Cryptography;
 using System.Threading;
 using FoxHollow.Archiver.Shared;
 using FoxHollow.Archiver.Shared.Classes.Tape;
-using FoxHollow.Archiver.Shared.TapeDrivers;
+using FoxHollow.FHM.Shared.TapeDrivers;
 using ICSharpCode.SharpZipLib.Tar;
 
 namespace FoxHollow.Archiver.CLI.Utilities.Tape
@@ -108,7 +108,7 @@ namespace FoxHollow.Archiver.CLI.Utilities.Tape
             _blockCount = BufferBlockCount;
 
             _tapeBuffer = new TapeBuffer(_blockSize, _blockCount, BufferFillPercent);
-            _tarOutStream = new TarOutputStream(_tapeBuffer, SysInfo.Config.Tape.BlockingFactor);
+            _tarOutStream = new TarOutputStream(_tapeBuffer, AppInfo.Config.Tape.BlockingFactor);
             _archive = new CustomTarArchive(_tarOutStream);
 
             this.OnProgressChanged += delegate {};

@@ -24,10 +24,10 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using FoxHollow.Archiver.Shared;
-using FoxHollow.Archiver.Shared.Models;
 using FoxHollow.Archiver.Shared.Models.Config;
 using FoxHollow.Archiver.Shared.Utilities;
-using FoxHollow.Archiver.Shared.TapeDrivers;
+using FoxHollow.FHM.Shared.Models;
+using FoxHollow.FHM.Shared.TapeDrivers;
 
 namespace FoxHollow.Archiver.TapeServer
 {
@@ -39,24 +39,24 @@ namespace FoxHollow.Archiver.TapeServer
         static void Main()
         {
             Utils.RequireSupportedOS();
-            SysInfo.InitPlatform();
+            AppInfo.InitPlatform();
             
 
             int pid = GetPid();
             
             Formatting.WriteLineC(ConsoleColor.Green, $"Archive TapeServer component starting up. (PID: {pid})");
             Console.WriteLine("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-            SysInfo.WriteSystemInfo(true);
+            AppInfo.WriteSystemInfo(true);
 
-            if (SysInfo.ConfigErrors.Count > 0)
+            if (AppInfo.ConfigErrors.Count > 0)
             {
                 Console.WriteLine("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-                Formatting.WriteLineC(ConsoleColor.Red, $"{SysInfo.ConfigErrors.Count} Configuration ERROR(s) Found!");
+                Formatting.WriteLineC(ConsoleColor.Red, $"{AppInfo.ConfigErrors.Count} Configuration ERROR(s) Found!");
                 Console.WriteLine();
 
-                int fieldWidth = SysInfo.ConfigErrors.Max(x => x.Field.Length)+2;
+                int fieldWidth = AppInfo.ConfigErrors.Max(x => x.Field.Length)+2;
 
-                foreach (ValidationError error in SysInfo.ConfigErrors)
+                foreach (ValidationError error in AppInfo.ConfigErrors)
                 {
                     Formatting.WriteC(ConsoleColor.Cyan, "Field: ");
                     Console.WriteLine(error.Field.PadRight(fieldWidth));
@@ -80,7 +80,7 @@ namespace FoxHollow.Archiver.TapeServer
             // uint blockSize = 512; //512 * 512;
             // int maxBlocks = 512;
             // int currentBlock = 0;
-            // string device = "/home/flip/archive/test.txt"; // SysInfo.TapeDrive;
+            // string device = "/home/flip/archive/test.txt"; // AppInfo.TapeDrive;
             // string text = String.Empty;
 
             // using (NativeLinuxTapeDriver tapeDrive = new NativeLinuxTapeDriver(device, blockSize))

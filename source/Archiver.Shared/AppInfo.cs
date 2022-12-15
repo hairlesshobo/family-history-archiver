@@ -20,21 +20,21 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Runtime.InteropServices;
-using FoxHollow.Archiver.Shared.Models;
 using FoxHollow.Archiver.Shared.Models.Config;
 using FoxHollow.Archiver.Shared.Utilities;
+using FoxHollow.FHM.Shared;
+using FoxHollow.FHM.Shared.Models;
+using FoxHollow.FHM.Shared.Utilities;
 
 namespace FoxHollow.Archiver.Shared
 {
     /// <summary>
     ///     Indicates the mode that the application is currently running in
     /// </summary>
-    public enum SysInfoMode
+    public enum AppInfoMode
     {
         Unknown, 
         ArchiverCLI, 
@@ -46,12 +46,11 @@ namespace FoxHollow.Archiver.Shared
     /// <summary>
     ///     Global class for providing useful system-related and config information
     /// </summary>
-    public static class SysInfo
+    public static class AppInfo
     {
         private static bool _didInit = false;
         private static ArchiverConfig _config = null;
-        private static SysInfoMode _mode = SysInfoMode.Unknown;
-        private static OSType _osType = OSType.Unknown;
+        private static AppInfoMode _mode = AppInfoMode.Unknown;
         private static bool _isOpticalDrivePresent = false;
         private static bool _isReadonlyFilesystem = true;
         private static bool _isTapeDrivePresent = true;
@@ -73,14 +72,9 @@ namespace FoxHollow.Archiver.Shared
         public static List<ValidationError> ConfigErrors => _configErrors;
 
         /// <summary>
-        ///     Operating system type the application is currently running on
-        /// </summary>
-        public static OSType OSType => _osType;
-
-        /// <summary>
         ///     Mode that the application is currently runnning as
         /// </summary>
-        public static SysInfoMode Mode => _mode;
+        public static AppInfoMode Mode => _mode;
 
         /// <summary>
         ///     Flag indicating whether one or more optical drives were detected
@@ -101,47 +95,15 @@ namespace FoxHollow.Archiver.Shared
         /// <summary>
         ///     Path to the configured tape drive
         /// </summary>
-        public static string TapeDrive => _mode == SysInfoMode.ArchiverCLI ? Config.Tape.Drive : Config.TapeServer.Drive;
-
-        /// <summary>
-        ///     CPU architecture of the currently running system
-        /// </summary>
-        public static Architecture Architecture => System.Runtime.InteropServices.RuntimeInformation.OSArchitecture;
-
-        /// <summary>
-        ///     User-friendly description of the currently running system
-        /// </summary>
-        public static string Description => System.Runtime.InteropServices.RuntimeInformation.OSDescription;
-
-        /// <summary>
-        ///     Identifier for the runtime
-        /// </summary>
-        public static string Identifier => System.Runtime.InteropServices.RuntimeInformation.RuntimeIdentifier;
-
-        /// <summary>
-        ///     Process ID of the currently running application
-        /// </summary>
-        public static int PID => Process.GetCurrentProcess().Id;
+        public static string TapeDrive => _mode == AppInfoMode.ArchiverCLI ? Config.Tape.Drive : Config.TapeServer.Drive;
         
         
         /// <summary>
         ///     Static constructor
         /// </summary>
-        static SysInfo()
+        static AppInfo()
         {
             _mode = GetMode();
-
-            if (OperatingSystem.IsWindows())
-                _osType = OSType.Windows;
-            else if (OperatingSystem.IsLinux())
-                _osType = OSType.Linux;
-            
-            // these are commented out because we have not yet built support for them into the app. For now, they will 
-            // be identified as "Unknown" and the app will not lauch on an unknown platform.
-            // else if (OperatingSystem.IsFreeBSD())
-            //     _osType = OSType.FreeBSD;
-            // else if (OperatingSystem.IsMacOS())
-            //     _osType = OSType.OSX;
         }
 
         /// <summary>
@@ -179,7 +141,7 @@ namespace FoxHollow.Archiver.Shared
             PrintField(color, 11, "Description", SysInfo.Description);
             PrintField(color, 11, "Identifier", SysInfo.Identifier);
 
-            if (writeConfig && Mode == SysInfoMode.TapeServer)
+            if (writeConfig && Mode == AppInfoMode.TapeServer)
             {
                 Console.WriteLine();
                 PrintHeader(color, "Configuration:");
@@ -210,23 +172,23 @@ namespace FoxHollow.Archiver.Shared
         ///     Get the mode that the application is currently running as
         /// </summary>
         /// <returns>Currently running mode</returns>
-        private static SysInfoMode GetMode()
+        private static AppInfoMode GetMode()
         {
             string assemblyName = Assembly.GetEntryAssembly().GetName().Name;
 
             switch (assemblyName)
             {
                 case "Archiver":
-                    return SysInfoMode.ArchiverCLI;
+                    return AppInfoMode.ArchiverCLI;
 
                 case "TapeServer":
-                    return SysInfoMode.TapeServer;
+                    return AppInfoMode.TapeServer;
 
                 case "TestCLI":
-                    return SysInfoMode.TestCLI;
+                    return AppInfoMode.TestCLI;
                 
                 default:
-                    return SysInfoMode.Unknown;
+                    return AppInfoMode.Unknown;
             }
         }
 

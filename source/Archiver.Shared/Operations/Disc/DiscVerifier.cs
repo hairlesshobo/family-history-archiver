@@ -26,10 +26,10 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using FoxHollow.Archiver.Shared.Classes.Disc;
-using FoxHollow.Archiver.Shared.Classes;
-using FoxHollow.Archiver.Shared.Models;
-using FoxHollow.Archiver.Shared.Utilities;
-using FoxHollow.Archiver.Shared.Structures;
+using FoxHollow.FHM.Shared.Structures;
+using FoxHollow.FHM.Shared.Classes;
+using FoxHollow.FHM.Shared.Models;
+using FoxHollow.FHM.Shared.Utilities;
 
 namespace FoxHollow.Archiver.Shared.Operations.Disc
 {

@@ -27,8 +27,8 @@ using FoxHollow.Archiver.Shared.Classes.Tape;
 using FoxHollow.Archiver.Shared;
 using ICSharpCode.SharpZipLib.Tar;
 using Newtonsoft.Json;
-using FoxHollow.Archiver.Shared.TapeDrivers;
-using FoxHollow.Archiver.Shared.Native;
+using FoxHollow.FHM.Shared.TapeDrivers;
+using FoxHollow.FHM.Shared.Native;
 using FoxHollow.TerminalUI.Elements;
 using FoxHollow.TerminalUI.Types;
 
@@ -41,9 +41,9 @@ namespace FoxHollow.Archiver.CLI.Utilities.Tape
         {
             List<TapeDetail> tapes = new List<TapeDetail>();
 
-            if (Directory.Exists(SysInfo.Directories.JSON))
+            if (Directory.Exists(AppInfo.Directories.JSON))
             {
-                string[] jsonFiles = Directory.GetFiles(SysInfo.Directories.JSON, $"tape_{id.ToString("000")}.json");
+                string[] jsonFiles = Directory.GetFiles(AppInfo.Directories.JSON, $"tape_{id.ToString("000")}.json");
                 int totalFiles = jsonFiles.Length;
                 
                 if (totalFiles == 1)
@@ -67,7 +67,7 @@ namespace FoxHollow.Archiver.CLI.Utilities.Tape
 
         public static void RewindTape()
         {
-            using (NativeWindowsTapeDriver tape = new NativeWindowsTapeDriver(SysInfo.TapeDrive, false))
+            using (NativeWindowsTapeDriver tape = new NativeWindowsTapeDriver(AppInfo.TapeDrive, false))
             {
                 tape.RewindTape();
             }
@@ -114,7 +114,7 @@ namespace FoxHollow.Archiver.CLI.Utilities.Tape
 
         public static bool TapeHasJsonRecord()
         {
-            using (NativeWindowsTapeDriver tape = new NativeWindowsTapeDriver(SysInfo.TapeDrive))
+            using (NativeWindowsTapeDriver tape = new NativeWindowsTapeDriver(AppInfo.TapeDrive))
             {
                 // lets test if the second file record is the start of a tar, or a json file. if
                 // a json file, then we know that the tape is a new style with the tar located
@@ -138,7 +138,7 @@ namespace FoxHollow.Archiver.CLI.Utilities.Tape
         // TODO: make async
         public static string ReadTxtSummaryFromTape()
         {
-            using (NativeWindowsTapeDriver tape = new NativeWindowsTapeDriver(SysInfo.TapeDrive))
+            using (NativeWindowsTapeDriver tape = new NativeWindowsTapeDriver(AppInfo.TapeDrive))
             {
                 byte[] buffer = new byte[tape.BlockSize];
 
@@ -193,7 +193,7 @@ namespace FoxHollow.Archiver.CLI.Utilities.Tape
 
         public static TapeInfo GetTapeInfo()
         {
-            using (NativeWindowsTapeDriver tape = new NativeWindowsTapeDriver(SysInfo.TapeDrive, false))
+            using (NativeWindowsTapeDriver tape = new NativeWindowsTapeDriver(AppInfo.TapeDrive, false))
             {
                 return GetTapeInfo(tape);
             }
@@ -206,7 +206,7 @@ namespace FoxHollow.Archiver.CLI.Utilities.Tape
             if (!hasJson)
                 throw new InvalidOperationException("Tape does not have json record!");
 
-            using (NativeWindowsTapeDriver tape = new NativeWindowsTapeDriver(SysInfo.TapeDrive, (uint)SysInfo.Config.Tape.TextBlockSize, false))
+            using (NativeWindowsTapeDriver tape = new NativeWindowsTapeDriver(AppInfo.TapeDrive, (uint)AppInfo.Config.Tape.TextBlockSize, false))
             {
                 byte[] buffer = new byte[tape.BlockSize];
 
@@ -241,14 +241,14 @@ namespace FoxHollow.Archiver.CLI.Utilities.Tape
         {
             bool hasJson = TapeHasJsonRecord();
 
-            using (NativeWindowsTapeDriver tape = new NativeWindowsTapeDriver(SysInfo.TapeDrive, SysInfo.Config.Tape.BlockingFactor * 512))
+            using (NativeWindowsTapeDriver tape = new NativeWindowsTapeDriver(AppInfo.TapeDrive, AppInfo.Config.Tape.BlockingFactor * 512))
             {
                 byte[] buffer = new byte[tape.BlockSize];
 
                 // seek the tape to the beginning of the file marker
                 tape.SetTapeFilePosition(hasJson ? 2 : 1);
 
-                TarArchive archive = TarArchive.CreateInputTarArchive(tape.Stream, SysInfo.Config.Tape.BlockingFactor);
+                TarArchive archive = TarArchive.CreateInputTarArchive(tape.Stream, AppInfo.Config.Tape.BlockingFactor);
                 archive.ProgressMessageEvent += ShowTarProgressMessage;
                 archive.ListContents();
             }
@@ -299,7 +299,7 @@ namespace FoxHollow.Archiver.CLI.Utilities.Tape
 
         public static bool IsTapeLoaded()
         {
-            using (NativeWindowsTapeDriver tape = new NativeWindowsTapeDriver(SysInfo.TapeDrive, false))
+            using (NativeWindowsTapeDriver tape = new NativeWindowsTapeDriver(AppInfo.TapeDrive, false))
             {
                 return tape.TapeLoaded();
             }

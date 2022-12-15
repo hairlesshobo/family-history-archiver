@@ -24,8 +24,8 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using FoxHollow.Archiver.Shared.Interfaces;
-using FoxHollow.Archiver.Shared.Utilities;
+using FoxHollow.FHM.Shared.Interfaces;
+using FoxHollow.FHM.Shared.Utilities;
 using Newtonsoft.Json;
 
 namespace FoxHollow.Archiver.Shared.Classes.Disc
@@ -47,10 +47,10 @@ namespace FoxHollow.Archiver.Shared.Classes.Disc
         public bool IsoCreated { get; set; } = false;
         
         [JsonIgnore]
-        public string IsoPath => PathUtils.CleanPathCombine(SysInfo.Directories.ISO, $"{this.DiscName}.iso");
+        public string IsoPath => PathUtils.CleanPathCombine(AppInfo.Directories.ISO, $"{this.DiscName}.iso");
 
         [JsonIgnore]
-        public string RootStagingPath => PathUtils.CleanPathCombine(SysInfo.Directories.DiscStaging, $"disc {this.DiscNumber.ToString("0000")}");
+        public string RootStagingPath => PathUtils.CleanPathCombine(AppInfo.Directories.DiscStaging, $"disc {this.DiscNumber.ToString("0000")}");
 
         public int FilesCopied => this.Files.Where(x => x.Copied == true).Count();
         
@@ -134,7 +134,7 @@ namespace FoxHollow.Archiver.Shared.Classes.Disc
         public async Task SaveToJsonAsync(string destinationDir = null, string fileName = null)
         {
             if (destinationDir == null)
-                destinationDir = SysInfo.Directories.JSON;
+                destinationDir = AppInfo.Directories.JSON;
 
             if (fileName == null)
                 fileName = $"disc_{this.DiscNumber.ToString("0000")}.json";

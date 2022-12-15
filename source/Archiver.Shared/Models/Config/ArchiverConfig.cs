@@ -21,8 +21,10 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using FoxHollow.Archiver.Shared.Interfaces;
 using FoxHollow.Archiver.Shared.Utilities;
+using FoxHollow.FHM.Shared;
+using FoxHollow.FHM.Shared.Models;
+using FoxHollow.FHM.Shared.Interfaces;
 
 namespace FoxHollow.Archiver.Shared.Models.Config
 {

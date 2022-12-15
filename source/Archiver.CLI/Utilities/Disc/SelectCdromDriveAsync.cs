@@ -5,6 +5,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using FoxHollow.Archiver.Shared.Models;
 using FoxHollow.Archiver.Shared.Utilities;
+using FoxHollow.FHM.Shared.Models;
+using FoxHollow.FHM.Shared.Utilities;
 using FoxHollow.TerminalUI;
 using FoxHollow.TerminalUI.Elements;
 using FoxHollow.TerminalUI.Types;

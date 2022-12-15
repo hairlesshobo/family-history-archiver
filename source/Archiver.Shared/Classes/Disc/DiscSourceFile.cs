@@ -21,7 +21,8 @@
 using System;
 using System.IO;
 using System.Linq;
-using FoxHollow.Archiver.Shared.Interfaces;
+using FoxHollow.FHM.Shared.Classes;
+using FoxHollow.FHM.Shared.Interfaces;
 using Newtonsoft.Json;
 
 namespace FoxHollow.Archiver.Shared.Classes.Disc
@@ -114,7 +115,9 @@ namespace FoxHollow.Archiver.Shared.Classes.Disc
 
         private static DiscDetail GetDestinationDisc(DiscScanStats stats, long FileSize)
         {
-            DiscDetail matchingDisc = stats.DestinationDiscs.FirstOrDefault(x => x.NewDisc == true && (x.DataSize + FileSize) < SysInfo.Config.Disc.CapacityLimit);
+            DiscDetail matchingDisc = stats.DestinationDiscs
+                                           .FirstOrDefault(x => x.NewDisc == true 
+                                                            && (x.DataSize + FileSize) < AppInfo.Config.Disc.CapacityLimit);
 
             if (matchingDisc == null)
             {

@@ -20,8 +20,8 @@
 
 using System;
 using System.IO;
-using FoxHollow.Archiver.Shared.Interfaces;
-using FoxHollow.Archiver.Shared.Utilities;
+using FoxHollow.FHM.Shared.Utilities;
+using FoxHollow.FHM.Shared.Interfaces;
 using Newtonsoft.Json;
 
 namespace FoxHollow.Archiver.Shared.Classes.Tape

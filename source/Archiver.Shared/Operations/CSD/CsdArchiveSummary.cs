@@ -56,7 +56,7 @@ namespace FoxHollow.Archiver.Shared.Operations.CSD
             long totalDriveCapacity = allCsdDrives.Sum(x => x.TotalSpace);
             long totalDataSize = allCsdDrives.Sum(x => x.DataSize);
             long totalDataSizeOnDisk = allCsdDrives.Sum(x => x.DataSizeOnDisc);
-            long totalFreeSpace = totalDriveCapacity - totalDataSize - (driveCount * SysInfo.Config.CSD.ReservedCapacityBytes);
+            long totalFreeSpace = totalDriveCapacity - totalDataSize - (driveCount * AppInfo.Config.CSD.ReservedCapacityBytes);
             double capacityUsed = Math.Round(((double)totalDataSize / (double)totalDriveCapacity)*100.0, 1);
 
             if (allCsdDrives.Count() > 0)
@@ -80,12 +80,12 @@ namespace FoxHollow.Archiver.Shared.Operations.CSD
 
                 foreach (CsdDetail csd in allCsdDrives)
                 {
-                    long usableFreeSpace = csd.FreeSpace - SysInfo.Config.CSD.ReservedCapacityBytes;
+                    long usableFreeSpace = csd.FreeSpace - AppInfo.Config.CSD.ReservedCapacityBytes;
                     
                     if (usableFreeSpace < 0 || usableFreeSpace == csd.BlockSize)
                         usableFreeSpace = 0;
 
-                    double csdPctUsed = Math.Round(((double)csd.DataSizeOnDisc / (double)(csd.TotalSpace-SysInfo.Config.CSD.ReservedCapacityBytes))*100.0, 1);
+                    double csdPctUsed = Math.Round(((double)csd.DataSizeOnDisc / (double)(csd.TotalSpace-AppInfo.Config.CSD.ReservedCapacityBytes))*100.0, 1);
 
                     this.AppendLine(csd.CsdName + "    " + Formatting.GetFriendlySize(usableFreeSpace).PadLeft(11) + "    " + Formatting.GetFriendlySize(csd.TotalSpace).PadLeft(11) + "    " + $"{csdPctUsed.ToString("N1")}%".PadLeft(6) + "    " + csd.TotalFiles.ToString("N0").PadLeft(10));
                 }

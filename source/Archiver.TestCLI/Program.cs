@@ -29,13 +29,14 @@ using System.Text;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
-using FoxHollow.Archiver.Shared;
-using FoxHollow.Archiver.Shared.Classes;
-using FoxHollow.Archiver.Shared.Exceptions;
-using FoxHollow.Archiver.Shared.Models;
 using FoxHollow.Archiver.Shared.Models.Config;
-using FoxHollow.Archiver.Shared.Native;
+using FoxHollow.Archiver.Shared;
 using FoxHollow.Archiver.Shared.Utilities;
+using FoxHollow.FHM.Shared;
+using FoxHollow.FHM.Shared.Classes;
+using FoxHollow.FHM.Shared.Exceptions;
+using FoxHollow.FHM.Shared.Models;
+using FoxHollow.FHM.Shared.Utilities;
 // using FoxHollow.LibSMB2Sharp;
 using FoxHollow.TerminalUI;
 using FoxHollow.TerminalUI.Elements;
@@ -48,7 +49,7 @@ namespace FoxHollow.Archiver.TestCLI
         static void Main()
         {
             Utils.RequireSupportedOS();
-            SysInfo.InitPlatform();
+            AppInfo.InitPlatform();
 
             try
             {
@@ -171,7 +172,7 @@ namespace FoxHollow.Archiver.TestCLI
                 Console.WriteLine();
                 Formatting.WriteLineC(ConsoleColor.Red, "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
                 Console.WriteLine();
-                SysInfo.WriteSystemInfo();
+                AppInfo.WriteSystemInfo();
                 Console.WriteLine();
                 Console.WriteLine();
                 Console.Write("Press ");
@@ -187,21 +188,21 @@ namespace FoxHollow.Archiver.TestCLI
         static void MainOld()
         {
             Utils.RequireSupportedOS();
-            SysInfo.InitPlatform();
+            AppInfo.InitPlatform();
 
             Formatting.WriteLineC(ConsoleColor.Green, $"Archive TestCLI component starting up. (PID: {SysInfo.PID})");
             Console.WriteLine("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-            SysInfo.WriteSystemInfo(true);
+            AppInfo.WriteSystemInfo(true);
 
-            if (SysInfo.ConfigErrors.Count > 0)
+            if (AppInfo.ConfigErrors.Count > 0)
             {
                 Console.WriteLine("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-                Formatting.WriteLineC(ConsoleColor.Red, $"{SysInfo.ConfigErrors.Count} Configuration ERROR(s) Found!");
+                Formatting.WriteLineC(ConsoleColor.Red, $"{AppInfo.ConfigErrors.Count} Configuration ERROR(s) Found!");
                 Console.WriteLine();
 
-                int fieldWidth = SysInfo.ConfigErrors.Max(x => x.Field.Length)+2;
+                int fieldWidth = AppInfo.ConfigErrors.Max(x => x.Field.Length)+2;
 
-                foreach (ValidationError error in SysInfo.ConfigErrors)
+                foreach (ValidationError error in AppInfo.ConfigErrors)
                 {
                     Formatting.WriteC(ConsoleColor.Cyan, "Field: ");
                     Console.WriteLine(error.Field.PadRight(fieldWidth));

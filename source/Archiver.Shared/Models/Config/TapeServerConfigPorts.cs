@@ -20,7 +20,8 @@
 
 using System;
 using System.Collections.Generic;
-using FoxHollow.Archiver.Shared.Interfaces;
+using FoxHollow.FHM.Shared.Interfaces;
+using FoxHollow.FHM.Shared.Models;
 
 namespace FoxHollow.Archiver.Shared.Models.Config
 {

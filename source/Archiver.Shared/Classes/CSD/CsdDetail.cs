@@ -23,9 +23,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using FoxHollow.Archiver.Shared;
-using FoxHollow.Archiver.Shared.Interfaces;
-using FoxHollow.Archiver.Shared.Utilities;
+using FoxHollow.FHM.Shared;
+using FoxHollow.FHM.Shared.Interfaces;
+using FoxHollow.FHM.Shared.Utilities;
 using Newtonsoft.Json;
 
 namespace FoxHollow.Archiver.Shared.Classes.CSD
@@ -88,7 +88,7 @@ namespace FoxHollow.Archiver.Shared.Classes.CSD
         public IEnumerable<CsdSourceFile> PendingFiles => _pendingFiles;
 
         [JsonIgnore]
-        public long UsableFreeSpace => this.TotalSpace - SysInfo.Config.CSD.ReservedCapacityBytes - this._dataSizeOnDisk - this._pendingBytesOnDisk;
+        public long UsableFreeSpace => this.TotalSpace - AppInfo.Config.CSD.ReservedCapacityBytes - this._dataSizeOnDisk - this._pendingBytesOnDisk;
         [JsonIgnore]
         public long PendingBytes => _pendingBytes;
         [JsonIgnore]
@@ -252,7 +252,7 @@ namespace FoxHollow.Archiver.Shared.Classes.CSD
 
         public static void SaveDetailToIndex(CsdDetail csd)
         {
-            string destDir = SysInfo.Directories.JSON;
+            string destDir = AppInfo.Directories.JSON;
             string jsonFilePath = PathUtils.CleanPathCombine(destDir, $"csd_{csd.CsdNumber.ToString("000")}.json");
 
             if (!Directory.Exists(destDir))
@@ -270,7 +270,7 @@ namespace FoxHollow.Archiver.Shared.Classes.CSD
         public void SaveToJson(string destinationDir = null, string fileName = null)
         {
             if (String.IsNullOrWhiteSpace(destinationDir))
-                destinationDir = SysInfo.Directories.JSON;
+                destinationDir = AppInfo.Directories.JSON;
 
             if (String.IsNullOrWhiteSpace(fileName))
                 fileName = $"csd_{this.CsdNumber.ToString("000")}.json";

@@ -19,7 +19,8 @@
  */
 
 using System;
-using FoxHollow.Archiver.Shared.Models;
+using FoxHollow.FHM.Shared;
+using FoxHollow.FHM.Shared.Models;
 
 namespace FoxHollow.Archiver.Shared.Utilities
 {
@@ -33,7 +34,7 @@ namespace FoxHollow.Archiver.Shared.Utilities
                 Formatting.WriteC(ConsoleColor.Red, "ERROR: ");
                 Console.WriteLine("The current operating system is unsupported.");
                 Console.WriteLine();
-                SysInfo.WriteSystemInfo();
+                AppInfo.WriteSystemInfo();
                 Console.WriteLine();
                 Console.WriteLine("The application will now exit.");
                 Environment.Exit(2);

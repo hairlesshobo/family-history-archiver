@@ -22,6 +22,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using FoxHollow.Archiver.Shared.Utilities;
+using FoxHollow.FHM.Shared.Utilities;
 
 namespace FoxHollow.Archiver.Shared.Classes.Tape
 {
@@ -89,7 +90,7 @@ namespace FoxHollow.Archiver.Shared.Classes.Tape
         public TapeSummary()
         {
             // TODO: Can this blocking factor be passed as a parameter?
-            this.BlockingFactor = SysInfo.Config.Tape.BlockingFactor;
+            this.BlockingFactor = AppInfo.Config.Tape.BlockingFactor;
             this.Directories = new List<TapeSourceDirectory>();
             this.Files = new List<TapeSourceFile>();
         }

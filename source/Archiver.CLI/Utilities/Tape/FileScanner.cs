@@ -24,7 +24,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using FoxHollow.Archiver.Shared.Classes.Tape;
-using FoxHollow.Archiver.Shared.Utilities;
+using FoxHollow.FHM.Shared.Utilities;
 
 namespace FoxHollow.Archiver.CLI.Utilities.Tape
 {

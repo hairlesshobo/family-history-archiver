@@ -23,8 +23,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using FoxHollow.Archiver.Shared.Interfaces;
-using FoxHollow.Archiver.Shared.Utilities;
+using FoxHollow.FHM.Shared.Interfaces;
 using Newtonsoft.Json;
 
 namespace FoxHollow.Archiver.Shared.Classes.Tape
@@ -99,7 +98,7 @@ namespace FoxHollow.Archiver.Shared.Classes.Tape
         public void SaveToJson(string destinationDir = null, string fileName = null)
         {
             if (destinationDir == null)
-                destinationDir = SysInfo.Directories.JSON;
+                destinationDir = AppInfo.Directories.JSON;
 
             if (fileName == null)
                 fileName = $"tape_{this.ID.ToString("000")}.json";

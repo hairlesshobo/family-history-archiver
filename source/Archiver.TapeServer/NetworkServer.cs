@@ -24,9 +24,9 @@ using System.Net.Sockets;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using FoxHollow.Archiver.Shared.Models;
 using FoxHollow.Archiver.Shared.Models.Config;
-using FoxHollow.Archiver.Shared.Interfaces;
+using FoxHollow.FHM.Shared.Models;
+using FoxHollow.FHM.Shared.Interfaces;
 
 namespace FoxHollow.Archiver.TapeServer
 {

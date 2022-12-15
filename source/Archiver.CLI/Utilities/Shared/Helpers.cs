@@ -27,9 +27,10 @@ using FoxHollow.Archiver.Shared;
 using FoxHollow.Archiver.Shared.Classes.CSD;
 using FoxHollow.Archiver.Shared.Classes.Disc;
 using FoxHollow.Archiver.Shared.Classes.Tape;
-using FoxHollow.Archiver.Shared.Interfaces;
 using FoxHollow.Archiver.Shared.Utilities;
 using FoxHollow.Archiver.Shared.Utilities.Disc;
+using FoxHollow.FHM.Shared.Interfaces;
+using FoxHollow.FHM.Shared.Utilities;
 using FoxHollow.TerminalUI;
 using FoxHollow.TerminalUI.Elements;
 using FoxHollow.TerminalUI.Types;
@@ -89,7 +90,7 @@ namespace FoxHollow.Archiver.CLI.Utilities.Shared
 
             text.Show();
 
-            return HelpersNew.ReadMediaIndexAsync<TMedia>(mediaType, cts.Token, (currentFile, totalFiles) => 
+            return ArchiveHelpers.ReadMediaIndexAsync<TMedia>(mediaType, cts.Token, (currentFile, totalFiles) => 
             {
                 progress.UpdateProgress(currentFile, totalFiles, true);
             });
@@ -102,10 +103,10 @@ namespace FoxHollow.Archiver.CLI.Utilities.Shared
             Formatting.WriteC(ConsoleColor.Magenta, "Creating index iso file...");
             Console.WriteLine();
 
-            string isoPath = PathUtils.CleanPathCombine(SysInfo.Directories.ISO, "index.iso");
+            string isoPath = PathUtils.CleanPathCombine(AppInfo.Directories.ISO, "index.iso");
             string isoName = "Archive Index";
 
-            ISO_Creator creator = new ISO_Creator(isoName, PathUtils.DirtyPath(SysInfo.Directories.Index), isoPath);
+            ISO_Creator creator = new ISO_Creator(isoName, PathUtils.DirtyPath(AppInfo.Directories.Index), isoPath);
 
             creator.OnProgressChanged += (currentPercent) => {
                 string line = StatusHelpers.GeneratePercentBar(Console.WindowWidth, 0, 0, currentPercent, (currentPercent == 100));
