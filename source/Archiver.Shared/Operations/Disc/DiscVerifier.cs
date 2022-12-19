@@ -37,7 +37,7 @@ namespace FoxHollow.Archiver.Shared.Operations.Disc
     {
         public delegate void StatusChangedDelegate(Status status, string statusText);
         public delegate void DiscVerificationStartedDelegate(DiscDetail disc);
-        public delegate void DiscVerificationProgressChangedDelegate(DiscDetail disc, Md5Progress progress, Stopwatch sw);
+        public delegate void DiscVerificationProgressChangedDelegate(DiscDetail disc, HashGenerationProgress progress, Stopwatch sw);
         public delegate void DiscVerificationCompleteDelegate(DiscDetail disc, bool success);
 
         public enum Status
@@ -105,10 +105,11 @@ namespace FoxHollow.Archiver.Shared.Operations.Disc
 
                 using (Stream reader = OpticalDriveUtils.GetDriveRawStream(_drive))
                 {
-                    Md5StreamGenerator generator = new Md5StreamGenerator(reader);
+                    HashStreamGenerator generator = new HashStreamGenerator(reader);
                     generator.OnProgressChanged += (progress) => this.OnDiscVerificationProgressChanged(disc, progress, sw);
 
-                    string hash = await generator.GenerateAsync(cToken);
+                    var hashes = await generator.GenerateAsync(cToken);
+                    string hash = hashes.Md5Hash;
 
                     if (cToken.IsCancellationRequested)
                         return;

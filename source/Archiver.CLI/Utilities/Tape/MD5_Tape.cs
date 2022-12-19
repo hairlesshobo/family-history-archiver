@@ -32,7 +32,7 @@ namespace FoxHollow.Archiver.CLI.Utilities.Tape
     public class MD5_Tape
     {
         public delegate void CompleteDelegate(string hash);
-        public delegate void ProgressChangedDelegate(Md5Progress progress);
+        public delegate void ProgressChangedDelegate(HashGenerationProgress progress);
 
         public event CompleteDelegate OnComplete;
         public event ProgressChangedDelegate OnProgressChanged;
@@ -76,7 +76,7 @@ namespace FoxHollow.Archiver.CLI.Utilities.Tape
             using (NativeWindowsTapeDriver tape = new NativeWindowsTapeDriver(AppInfo.TapeDrive, blockSize))
             using (MD5 md5 = MD5.Create())
             {
-                Md5Progress progress = new Md5Progress()
+                HashGenerationProgress progress = new HashGenerationProgress()
                 {
                     TotalBytesProcessed = 0,
                     BytesProcessedSinceLastUpdate = 0,

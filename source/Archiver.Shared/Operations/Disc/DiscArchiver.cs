@@ -103,7 +103,7 @@ namespace FoxHollow.Archiver.Shared.Operations.Disc
         public delegate void DiscIndexProgressDelegate(DiscDetail disc, DiscScanStats stats, DiscIndexProgress progress);
         public delegate void GenerateHashProgressDelegate(DiscDetail disc, DiscScanStats stats, GenerateHashProgress progress);
         public delegate void CreateIsoProgressDelegate(DiscDetail disc, DiscScanStats stats, CreateIsoProgress progress);
-        public delegate void ReadIsoMd5ProgressDelegate(DiscDetail disc, DiscScanStats stats, TimeSpan elapsed, Md5Progress progress);
+        public delegate void ReadIsoMd5ProgressDelegate(DiscDetail disc, DiscScanStats stats, TimeSpan elapsed, HashGenerationProgress progress);
 
         public event StepStateDelegate OnStepStart;
         public event StepStateDelegate OnStepComplete;
@@ -531,11 +531,12 @@ namespace FoxHollow.Archiver.Shared.Operations.Disc
 
             using (FileStream fs = File.OpenRead(disc.IsoPath))
             {
-                Md5StreamGenerator generator = new Md5StreamGenerator(fs);
+                HashStreamGenerator generator = new HashStreamGenerator(fs);
 
                 generator.OnProgressChanged += (progress) => this.OnReadIsoMd5Progress(disc, _stats, discSw.Elapsed, progress);
 
-                disc.Hash = await generator.GenerateAsync(_cToken);
+                var hashes = await generator.GenerateAsync(_cToken);
+                disc.Hash = hashes.Md5Hash;
             }
 
             this.OnStepStart(disc, _stats, ProcessStep.ReadIsoHash);
